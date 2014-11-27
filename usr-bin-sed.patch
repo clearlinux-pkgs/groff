@@ -1,0 +1,10 @@
+Index: groff-1.22.2/font/devps/generate/symbol.sed
+===================================================================
+--- groff-1.22.2.orig/font/devps/generate/symbol.sed	2014-12-10 11:48:47.462644712 +0000
++++ groff-1.22.2/font/devps/generate/symbol.sed	2014-12-10 11:48:55.658645069 +0000
+@@ -1,4 +1,4 @@
+-#! /bin/sed -f
++#! /usr/bin/sed -f
+ # Set up uniform vertical dimensions for extensible glyphs (needed by eqn).
+ /^C .*[ ;]N bracketlefttp[ ;]/bx
+ /^C .*[ ;]N bracketleftex[ ;]/bx
