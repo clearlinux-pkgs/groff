@@ -4,7 +4,7 @@
 #
 Name     : groff
 Version  : 1.22.2
-Release  : 10
+Release  : 11
 URL      : http://groff.ffii.org/groff/groff-1.22.2.tar.gz
 Source0  : http://groff.ffii.org/groff/groff-1.22.2.tar.gz
 Summary  : No detailed summary available
