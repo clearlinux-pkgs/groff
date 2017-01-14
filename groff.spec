@@ -4,18 +4,19 @@
 #
 Name     : groff
 Version  : 1.22.2
-Release  : 13
+Release  : 14
 URL      : http://groff.ffii.org/groff/groff-1.22.2.tar.gz
 Source0  : http://groff.ffii.org/groff/groff-1.22.2.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-3.0+ MIT GPL-3.0 GFDL-1.3 GPL-2.0
+License  : GFDL-1.3 GPL-2.0 GPL-3.0 GPL-3.0+ MIT
 Requires: groff-bin
 Requires: groff-doc
 Requires: groff-data
 BuildRequires : bison
 BuildRequires : texinfo
 Patch1: usr-bin-sed.patch
+Patch2: timestamp.patch
 
 %description
 This is the GNU `groff' document formatting system.  The version
@@ -49,15 +50,23 @@ doc components for the groff package.
 %prep
 %setup -q -n groff-1.22.2
 %patch1 -p1
+%patch2 -p1
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1484437903
 %configure --disable-static
-make V=1 %{?_smp_mflags}
+make V=1
 
 %check
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+export LANG=C
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost
+make VERBOSE=1 V=1 check
 
 %install
+export SOURCE_DATE_EPOCH=1484437903
 rm -rf %{buildroot}
 %make_install
 
