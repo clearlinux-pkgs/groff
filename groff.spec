@@ -6,7 +6,7 @@
 #
 Name     : groff
 Version  : 1.22.2
-Release  : 15
+Release  : 16
 URL      : https://ftp.gnu.org/gnu/groff/groff-1.22.2.tar.gz
 Source0  : https://ftp.gnu.org/gnu/groff/groff-1.22.2.tar.gz
 Source99 : https://ftp.gnu.org/gnu/groff/groff-1.22.2.tar.gz.sig
