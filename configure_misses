@@ -1,0 +1,35 @@
+Configure miss: whether character set is EBCDIC
+Configure miss: whether to install .cmd wrapper scripts for Windows
+Configure miss: X
+Configure miss: byacc
+Configure miss: csh hash hack
+Configure miss: direct.h usability
+Configure miss: direct.h presence
+Configure miss: process.h usability
+Configure miss: process.h presence
+Configure miss: ISC 3.x or 4.x
+Configure miss: whether -D_POSIX_SOURCE is necessary
+Configure miss: whether gettimeofday must be declared
+Configure miss: whether popen must be declared
+Configure miss: whether pclose must be declared
+Configure miss: whether putenv must be declared
+Configure miss: whether rand must be declared
+Configure miss: whether snprintf must be declared
+Configure miss: whether srand must be declared
+Configure miss: whether strcasecmp must be declared
+Configure miss: whether strncasecmp must be declared
+Configure miss: whether vfprintf must be declared
+Configure miss: whether vsnprintf must be declared
+Configure miss: C++ <osfcn.h>
+Configure miss: struct exception
+Configure miss: whether sys_siglist is declared
+Configure miss: traditional preprocessor
+Configure miss: w_coredump
+Configure miss: existing troff installation
+Configure miss: x86_64-generic-linux-gnu-gs
+Configure miss: x86_64-generic-linux-gnu-gswin32c
+Configure miss: x86_64-generic-linux-gnu-gsos2
+Configure miss: gs
+Configure miss: gswin32c
+Configure miss: gsos2
+Configure miss: whether pnmtops can handle the -nosetpage option

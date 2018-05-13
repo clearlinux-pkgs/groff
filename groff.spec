@@ -6,16 +6,16 @@
 #
 Name     : groff
 Version  : 1.22.3
-Release  : 19
+Release  : 20
 URL      : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz
 Source0  : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz
 Source99 : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-3.0 GPL-3.0+ MIT
+License  : GPL-2.0 GPL-3.0 GPL-3.0+ MIT
 Requires: groff-bin
-Requires: groff-doc
 Requires: groff-data
+Requires: groff-man
 BuildRequires : bison
 BuildRequires : texinfo
 Patch1: usr-bin-sed.patch
@@ -29,6 +29,7 @@ number is given in the file VERSION.
 Summary: bin components for the groff package.
 Group: Binaries
 Requires: groff-data
+Requires: groff-man
 
 %description bin
 bin components for the groff package.
@@ -45,9 +46,18 @@ data components for the groff package.
 %package doc
 Summary: doc components for the groff package.
 Group: Documentation
+Requires: groff-man
 
 %description doc
 doc components for the groff package.
+
+
+%package man
+Summary: man components for the groff package.
+Group: Default
+
+%description man
+man components for the groff package.
 
 
 %prep
@@ -60,9 +70,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494337753
+export SOURCE_DATE_EPOCH=1526227001
 %configure --disable-static
-make V=1
+make
 
 %check
 export LANG=C
@@ -72,7 +82,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 check
 
 %install
-export SOURCE_DATE_EPOCH=1494337753
+export SOURCE_DATE_EPOCH=1526227001
 rm -rf %{buildroot}
 %make_install
 
@@ -498,6 +508,71 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc /usr/share/doc/groff/*
 %doc /usr/share/info/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man7/*
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man1/addftinfo.1
+/usr/share/man/man1/afmtodit.1
+/usr/share/man/man1/chem.1
+/usr/share/man/man1/eqn.1
+/usr/share/man/man1/eqn2graph.1
+/usr/share/man/man1/gdiffmk.1
+/usr/share/man/man1/glilypond.1
+/usr/share/man/man1/gperl.1
+/usr/share/man/man1/gpinyin.1
+/usr/share/man/man1/grap2graph.1
+/usr/share/man/man1/grn.1
+/usr/share/man/man1/grodvi.1
+/usr/share/man/man1/groff.1
+/usr/share/man/man1/groffer.1
+/usr/share/man/man1/grog.1
+/usr/share/man/man1/grohtml.1
+/usr/share/man/man1/grolbp.1
+/usr/share/man/man1/grolj4.1
+/usr/share/man/man1/gropdf.1
+/usr/share/man/man1/grops.1
+/usr/share/man/man1/grotty.1
+/usr/share/man/man1/hpftodit.1
+/usr/share/man/man1/indxbib.1
+/usr/share/man/man1/lkbib.1
+/usr/share/man/man1/lookbib.1
+/usr/share/man/man1/mmroff.1
+/usr/share/man/man1/neqn.1
+/usr/share/man/man1/nroff.1
+/usr/share/man/man1/pdfmom.1
+/usr/share/man/man1/pdfroff.1
+/usr/share/man/man1/pfbtops.1
+/usr/share/man/man1/pic.1
+/usr/share/man/man1/pic2graph.1
+/usr/share/man/man1/preconv.1
+/usr/share/man/man1/refer.1
+/usr/share/man/man1/roff2dvi.1
+/usr/share/man/man1/roff2html.1
+/usr/share/man/man1/roff2pdf.1
+/usr/share/man/man1/roff2ps.1
+/usr/share/man/man1/roff2text.1
+/usr/share/man/man1/roff2x.1
+/usr/share/man/man1/soelim.1
+/usr/share/man/man1/tbl.1
+/usr/share/man/man1/tfmtodit.1
+/usr/share/man/man1/troff.1
+/usr/share/man/man5/groff_font.5
+/usr/share/man/man5/groff_out.5
+/usr/share/man/man5/groff_tmac.5
+/usr/share/man/man5/lj4_font.5
+/usr/share/man/man7/ditroff.7
+/usr/share/man/man7/groff.7
+/usr/share/man/man7/groff_char.7
+/usr/share/man/man7/groff_diff.7
+/usr/share/man/man7/groff_filenames.7
+/usr/share/man/man7/groff_hdtbl.7
+/usr/share/man/man7/groff_man.7
+/usr/share/man/man7/groff_mdoc.7
+/usr/share/man/man7/groff_me.7
+/usr/share/man/man7/groff_mm.7
+/usr/share/man/man7/groff_mmse.7
+/usr/share/man/man7/groff_mom.7
+/usr/share/man/man7/groff_ms.7
+/usr/share/man/man7/groff_trace.7
+/usr/share/man/man7/groff_www.7
+/usr/share/man/man7/roff.7
