@@ -6,16 +6,17 @@
 #
 Name     : groff
 Version  : 1.22.3
-Release  : 21
-URL      : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz
-Source0  : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz
-Source99 : https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz.sig
+Release  : 22
+URL      : https://mirrors.kernel.org/gnu/groff/groff-1.22.3.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/groff/groff-1.22.3.tar.gz
+Source99 : https://mirrors.kernel.org/gnu/groff/groff-1.22.3.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+ MIT
-Requires: groff-bin
-Requires: groff-data
-Requires: groff-man
+Requires: groff-bin = %{version}-%{release}
+Requires: groff-data = %{version}-%{release}
+Requires: groff-license = %{version}-%{release}
+Requires: groff-man = %{version}-%{release}
 BuildRequires : bison
 BuildRequires : texinfo
 Patch1: usr-bin-sed.patch
@@ -28,8 +29,9 @@ number is given in the file VERSION.
 %package bin
 Summary: bin components for the groff package.
 Group: Binaries
-Requires: groff-data
-Requires: groff-man
+Requires: groff-data = %{version}-%{release}
+Requires: groff-license = %{version}-%{release}
+Requires: groff-man = %{version}-%{release}
 
 %description bin
 bin components for the groff package.
@@ -46,10 +48,18 @@ data components for the groff package.
 %package doc
 Summary: doc components for the groff package.
 Group: Documentation
-Requires: groff-man
+Requires: groff-man = %{version}-%{release}
 
 %description doc
 doc components for the groff package.
+
+
+%package license
+Summary: license components for the groff package.
+Group: Default
+
+%description license
+license components for the groff package.
 
 
 %package man
@@ -70,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526227001
+export SOURCE_DATE_EPOCH=1542161687
 %configure --disable-static
 make
 
@@ -82,8 +92,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 check
 
 %install
-export SOURCE_DATE_EPOCH=1526227001
+export SOURCE_DATE_EPOCH=1542161687
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/groff
+cp COPYING %{buildroot}/usr/share/package-licenses/groff/COPYING
+cp LICENSES %{buildroot}/usr/share/package-licenses/groff/LICENSES
+cp contrib/mom/copyright %{buildroot}/usr/share/package-licenses/groff/contrib_mom_copyright
 %make_install
 
 %files
@@ -505,12 +519,18 @@ rm -rf %{buildroot}
 /usr/share/groff/site-tmac/mdoc.local
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/doc/groff/*
 %doc /usr/share/info/*
 
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/groff/COPYING
+/usr/share/package-licenses/groff/LICENSES
+/usr/share/package-licenses/groff/contrib_mom_copyright
+
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/addftinfo.1
 /usr/share/man/man1/afmtodit.1
 /usr/share/man/man1/chem.1
