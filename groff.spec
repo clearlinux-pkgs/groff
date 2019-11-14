@@ -6,15 +6,16 @@
 #
 Name     : groff
 Version  : 1.22.4
-Release  : 23
+Release  : 24
 URL      : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
-Source99 : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz.sig
+Source1 : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+ MIT
 Requires: groff-bin = %{version}-%{release}
 Requires: groff-data = %{version}-%{release}
+Requires: groff-info = %{version}-%{release}
 Requires: groff-license = %{version}-%{release}
 Requires: groff-man = %{version}-%{release}
 BuildRequires : bison
@@ -29,7 +30,6 @@ Summary: bin components for the groff package.
 Group: Binaries
 Requires: groff-data = %{version}-%{release}
 Requires: groff-license = %{version}-%{release}
-Requires: groff-man = %{version}-%{release}
 
 %description bin
 bin components for the groff package.
@@ -47,9 +47,18 @@ data components for the groff package.
 Summary: doc components for the groff package.
 Group: Documentation
 Requires: groff-man = %{version}-%{release}
+Requires: groff-info = %{version}-%{release}
 
 %description doc
 doc components for the groff package.
+
+
+%package info
+Summary: info components for the groff package.
+Group: Default
+
+%description info
+info components for the groff package.
 
 
 %package license
@@ -70,29 +79,35 @@ man components for the groff package.
 
 %prep
 %setup -q -n groff-1.22.4
+cd %{_builddir}/groff-1.22.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1546466369
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1573773479
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 check
 
 %install
-export SOURCE_DATE_EPOCH=1546466369
+export SOURCE_DATE_EPOCH=1573773479
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/groff
-cp COPYING %{buildroot}/usr/share/package-licenses/groff/COPYING
-cp contrib/mom/copyright %{buildroot}/usr/share/package-licenses/groff/contrib_mom_copyright
+cp %{_builddir}/groff-1.22.4/COPYING %{buildroot}/usr/share/package-licenses/groff/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/package-licenses/groff/032dc409f7382661229de9933ee964cb8904cb01
 %make_install
 
 %files
@@ -521,12 +536,17 @@ cp contrib/mom/copyright %{buildroot}/usr/share/package-licenses/groff/contrib_m
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/groff/*
-%doc /usr/share/info/*
+
+%files info
+%defattr(0644,root,root,0755)
+/usr/share/info/groff.info
+/usr/share/info/groff.info-1
+/usr/share/info/groff.info-2
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/groff/COPYING
-/usr/share/package-licenses/groff/contrib_mom_copyright
+/usr/share/package-licenses/groff/032dc409f7382661229de9933ee964cb8904cb01
+/usr/share/package-licenses/groff/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files man
 %defattr(0644,root,root,0755)

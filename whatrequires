@@ -1,10 +1,13 @@
 # This file contains recursive sources that require this package
+compat-curl-gnutls-soname4
 curl
 dialog
 diffstat
+docbook2X
 epm
 fltk
 krb5
+libedit
 man-db
 man-pages
 nano
@@ -13,6 +16,7 @@ openldap
 openssh
 openvswitch
 perl
-ruby
+rrdtool
 setserial
 sudo
+xterm
