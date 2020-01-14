@@ -6,10 +6,10 @@
 #
 Name     : groff
 Version  : 1.22.4
-Release  : 24
+Release  : 25
 URL      : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
-Source1 : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz.sig
+Source1  : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+ MIT
@@ -22,8 +22,23 @@ BuildRequires : bison
 BuildRequires : texinfo
 
 %description
-This is the GNU `groff' document formatting system.  The version
-number is given in the file VERSION.
+This directory contains examples of my enhancements to MM.
+APP		The appendix macro.
+B1B2		Box macro with text.
+COVER		My general cover macro, this example is using
+ms.cov.
+IND		A general indexing method, see manual for INITI.
+LT		The letter macro.
+LT.se		A Swedish example with the extra
+Swedish macros for getting a letter conforming
+to Swedish standard letter, both left and right adjusted.
+ML		Marked list, an extended list type.
+MOVE		The MOVE macro, how to begin to print on an exact position.
+MUL		Enhanced multicolumn mode.
+NCOL		Start on next column. (Not for MUL*)
+ND		New date, with ISO date example.
+References	How to use references.
+SETR		General reference system, see manual for INITR.
 
 %package bin
 Summary: bin components for the groff package.
@@ -51,6 +66,14 @@ Requires: groff-info = %{version}-%{release}
 
 %description doc
 doc components for the groff package.
+
+
+%package extras
+Summary: extras components for the groff package.
+Group: Default
+
+%description extras
+extras components for the groff package.
 
 
 %package info
@@ -86,12 +109,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573773479
+export SOURCE_DATE_EPOCH=1579021717
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make
 
@@ -103,7 +130,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 check
 
 %install
-export SOURCE_DATE_EPOCH=1573773479
+export SOURCE_DATE_EPOCH=1579021717
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/groff
 cp %{_builddir}/groff-1.22.4/COPYING %{buildroot}/usr/share/package-licenses/groff/8624bcdae55baeef00cd11d5dfcfa60f68710a02
@@ -128,33 +155,23 @@ cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/packag
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/addftinfo
-/usr/bin/afmtodit
-/usr/bin/chem
 /usr/bin/eqn
 /usr/bin/eqn2graph
 /usr/bin/gdiffmk
-/usr/bin/glilypond
-/usr/bin/gperl
-/usr/bin/gpinyin
 /usr/bin/grap2graph
 /usr/bin/grn
 /usr/bin/grodvi
 /usr/bin/groff
-/usr/bin/groffer
-/usr/bin/grog
 /usr/bin/grolbp
 /usr/bin/grolj4
-/usr/bin/gropdf
 /usr/bin/grops
 /usr/bin/grotty
 /usr/bin/hpftodit
 /usr/bin/indxbib
 /usr/bin/lkbib
 /usr/bin/lookbib
-/usr/bin/mmroff
 /usr/bin/neqn
 /usr/bin/nroff
-/usr/bin/pdfmom
 /usr/bin/pdfroff
 /usr/bin/pfbtops
 /usr/bin/pic
@@ -163,12 +180,6 @@ cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/packag
 /usr/bin/pre-grohtml
 /usr/bin/preconv
 /usr/bin/refer
-/usr/bin/roff2dvi
-/usr/bin/roff2html
-/usr/bin/roff2pdf
-/usr/bin/roff2ps
-/usr/bin/roff2text
-/usr/bin/roff2x
 /usr/bin/soelim
 /usr/bin/tbl
 /usr/bin/tfmtodit
@@ -536,6 +547,25 @@ cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/packag
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/groff/*
+
+%files extras
+%defattr(-,root,root,-)
+/usr/bin/afmtodit
+/usr/bin/chem
+/usr/bin/glilypond
+/usr/bin/gperl
+/usr/bin/gpinyin
+/usr/bin/groffer
+/usr/bin/grog
+/usr/bin/gropdf
+/usr/bin/mmroff
+/usr/bin/pdfmom
+/usr/bin/roff2dvi
+/usr/bin/roff2html
+/usr/bin/roff2pdf
+/usr/bin/roff2ps
+/usr/bin/roff2text
+/usr/bin/roff2x
 
 %files info
 %defattr(0644,root,root,0755)
