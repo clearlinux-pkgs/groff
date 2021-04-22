@@ -1,17 +1,21 @@
 # This file contains recursive sources that require this package
+cgit
 compat-curl-gnutls-soname4
+corosync
 curl
 dialog
 diffstat
 docbook2X
 epm
 fltk
+graphviz
 krb5
 libedit
 man-db
 man-pages
 nano
 nasm
+ntopng
 openldap
 openssh
 openvswitch
@@ -19,4 +23,5 @@ perl
 rrdtool
 setserial
 sudo
+vifm
 xterm

@@ -6,13 +6,13 @@
 #
 Name     : groff
 Version  : 1.22.4
-Release  : 25
+Release  : 26
 URL      : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz
 Source1  : https://mirrors.kernel.org/gnu/groff/groff-1.22.4.tar.gz.sig
-Summary  : No detailed summary available
+Summary  : GNU troff, a typesetting system
 Group    : Development/Tools
-License  : GPL-2.0 GPL-3.0 GPL-3.0+ MIT
+License  : BSD-3-Clause GFDL-1.3 GPL-2.0 GPL-3.0 GPL-3.0+ MIT
 Requires: groff-bin = %{version}-%{release}
 Requires: groff-data = %{version}-%{release}
 Requires: groff-info = %{version}-%{release}
@@ -22,23 +22,11 @@ BuildRequires : bison
 BuildRequires : texinfo
 
 %description
-This directory contains examples of my enhancements to MM.
-APP		The appendix macro.
-B1B2		Box macro with text.
-COVER		My general cover macro, this example is using
-ms.cov.
-IND		A general indexing method, see manual for INITI.
-LT		The letter macro.
-LT.se		A Swedish example with the extra
-Swedish macros for getting a letter conforming
-to Swedish standard letter, both left and right adjusted.
-ML		Marked list, an extended list type.
-MOVE		The MOVE macro, how to begin to print on an exact position.
-MUL		Enhanced multicolumn mode.
-NCOL		Start on next column. (Not for MUL*)
-ND		New date, with ISO date example.
-References	How to use references.
-SETR		General reference system, see manual for INITR.
+Groff (GNU troff) is a typesetting system that reads plain text mixed with
+formatting commands and produces formatted output. Output may be PostScript or
+PDF, HTML, or ASCII/UTF-8 for display at the terminal. Formatting commands may
+be either low-level typesetting requests ("primitives") or macros from a
+supplied set. Users may also write their own macros. All three may be combined.
 
 %package bin
 Summary: bin components for the groff package.
@@ -109,15 +97,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579021717
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1619060870
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make
@@ -127,13 +114,14 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 check
+make check
 
 %install
-export SOURCE_DATE_EPOCH=1579021717
+export SOURCE_DATE_EPOCH=1619060870
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/groff
 cp %{_builddir}/groff-1.22.4/COPYING %{buildroot}/usr/share/package-licenses/groff/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/groff-1.22.4/LICENSES %{buildroot}/usr/share/package-licenses/groff/ff891e286a336cdf8056c306467de12d0da97ff7
 cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/package-licenses/groff/032dc409f7382661229de9933ee964cb8904cb01
 %make_install
 
@@ -577,6 +565,7 @@ cp %{_builddir}/groff-1.22.4/contrib/mom/copyright %{buildroot}/usr/share/packag
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/groff/032dc409f7382661229de9933ee964cb8904cb01
 /usr/share/package-licenses/groff/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+/usr/share/package-licenses/groff/ff891e286a336cdf8056c306467de12d0da97ff7
 
 %files man
 %defattr(0644,root,root,0755)
