@@ -1,11 +1,10 @@
 # This file contains recursive sources that require this package
-cgit
-compat-curl-gnutls-soname4
 corosync
 curl
 dialog
 diffstat
 docbook2X
+enchant
 epm
 fltk
 graphviz
